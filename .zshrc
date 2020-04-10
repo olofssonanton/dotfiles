@@ -1,6 +1,5 @@
 # *-*-*-*-* ZSH/OH MY ZSH SETTINGS *-*-*-*-*
 
-export ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 ZSH_THEME="olofssonanton"
 

@@ -28,6 +28,7 @@ function linkDotfile {
   ln -s ${dotfilesDir}/${1} ${dest}
 }
 
+linkDotfile .zshenv
 linkDotfile .zshrc
 linkDotfile .gitconfig
 linkDotfile .tmux.conf

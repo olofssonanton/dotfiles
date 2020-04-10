@@ -1,18 +1,16 @@
 #!/bin/bash
 
-# Stolen from https://github.com/tomnomnom/dotfiles/
+# sudo management from https://askubuntu.com/a/970898
+if ! [ $(id -u) = 0 ]; then
+  echo "Need root permissions!"
+  exit 1
+fi
 
-function install {
-  which $1 &> /dev/null
+if [ $SUDO_USER ]; then
+  real_user=$SUDO_USER
+else
+  real_user=$(whoami)
+fi
 
-  if [ $? -ne 0 ]; then
-    echo "Installing: ${1}..."
-    apt-get install $1
-  else
-    echo "Already installed: ${1}"
-  fi
-}
-
-install tmux
-install awesome
-install unclutter # Change EXTRA_OPTS in /etc/default/unclutter to "-idle 2 -noevents"
+./scripts/apt-install.sh
+sudo -u $real_user -i $(pwd)/scripts/install-omz.sh
