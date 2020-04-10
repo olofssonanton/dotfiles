@@ -32,3 +32,4 @@ linkDotfile .zshrc
 linkDotfile .gitconfig
 linkDotfile .tmux.conf
 linkDotfile .xinitrc
+linkDotfile .config/awesome

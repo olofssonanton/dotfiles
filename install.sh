@@ -14,4 +14,5 @@ function install {
 }
 
 install tmux
+install awesome
 install unclutter
