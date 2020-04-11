@@ -6,6 +6,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local dpi       = require("beautiful.xresources").apply_dpi
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -45,18 +46,13 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -98,15 +94,15 @@ end
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
+   { "Hotkeys", function() return false, hotkeys_popup.show_help end},
+   { "Manual", terminal .. " -e man awesome" },
+   { "Edit config", editor_cmd .. " " .. awesome.conffile },
+   { "Restart", awesome.restart },
+   { "Quit", function() awesome.quit() end}
 }
 
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
+local menu_awesome = { "Awesome", myawesomemenu, beautiful.awesome_icon }
+local menu_terminal = { "Terminal", terminal }
 
 if has_fdo then
     mymainmenu = freedesktop.menu.build({
@@ -124,7 +120,7 @@ else
 end
 
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.launcher({ image = beautiful.menu_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
@@ -189,7 +185,7 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
+        gears.wallpaper.maximized(wallpaper, s)
     end
 end
 
@@ -234,10 +230,10 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             wibox.widget.systray(),
-            mytextclock,
-            s.mylayoutbox,
+            wibox.container.margin(mykeyboardlayout, dpi(2), dpi(2)),
+            wibox.container.margin(mytextclock, dpi(3), dpi(5)),
+            wibox.container.margin(s.mylayoutbox, dpi(2), dpi(3), dpi(3), dpi(3)),
         },
     }
 end)
@@ -317,9 +313,9 @@ globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)      end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "n", function () awful.layout.inc( 1)                      end,
+    awful.key({ modkey,           }, ".", function () awful.layout.inc( 1)                      end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "n", function () awful.layout.inc(-1)                      end,
+    awful.key({ modkey,           }, ",", function () awful.layout.inc(-1)                      end,
               {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
