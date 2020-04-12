@@ -29,7 +29,10 @@ source $ZSH/oh-my-zsh.sh
 # *-*-*-*-* UTILITIES *-*-*-*-*
 
 # Copy to clipboard
-alias clip='xclip -se c'
+alias clip="xclip -se c"
+
+# Display calendar
+alias cal="ncal -bw"
 
 # Search in folder, excluding certain paths
 function ff() {
@@ -37,8 +40,8 @@ function ff() {
   find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/build/*" -exec grep --color -nH -e $1 {} +
 }
 
-# Display calendar
-alias cal='ncal -bw'
+# Alias for the plugin "jump"
+alias j="jump"
 
 # Serve current directory on port 1337
 alias webshare="python -m SimpleHTTPServer 1337"
