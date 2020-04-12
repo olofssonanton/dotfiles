@@ -63,6 +63,10 @@ theme.taglist_fg_focus   = theme.fg_focus
 theme.taglist_fg_empty   = theme.taglist_bg_empty -- Set to same color as bg to hide empty tags
 theme.taglist_fg_urgent  = theme.fg_urgent
 
+theme.hotkeys_fg            = theme.fg_focus
+theme.hotkeys_bg            = theme.bg_normal
+theme.hotkeys_modifiers_fg  = theme.fg_normal
+
 -- Generate taglist squares:
 -- local taglist_square_size = dpi(1)
 -- theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
