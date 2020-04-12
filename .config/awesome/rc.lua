@@ -355,6 +355,26 @@ globalkeys = gears.table.join(
               end,
               {description = "switch keyboard layout", group = "custom"}),
 
+    -- Gapless fullscreen mode for multiple clients
+    awful.key({ modkey }, "z",
+              function ()
+                  local screen = awful.screen.focused()
+                  screen.mywibox.visible = not screen.mywibox.visible
+                  local selected_tag = awful.screen.focused().selected_tag
+                  local tags = awful.screen.focused().tags
+
+                  local gap = beautiful.useless_gap
+                  local current_gap = selected_tag.gap
+                  if current_gap ~= 0 then
+                    gap = 0
+                  end
+
+                  for key,tag in pairs(tags) do
+                    tag.gap = gap
+                  end
+              end,
+              {description = "toggle gapless fullscreen", group = "client"}),
+
     -- Multimedia
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
