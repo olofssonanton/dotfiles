@@ -5,10 +5,10 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
 
-blue       = "#4490c5";
-red        = "#c54444";
-orange     = "#b05731";
-green      = "#4fb031";
+blue       = "#4490c5"
+red        = "#c54444"
+orange     = "#b05731"
+green      = "#4fb031"
 
 dgrey      = "#282829"
 mgrey      = "#404042"
@@ -32,11 +32,12 @@ theme.fg_focus      = whiteish
 theme.fg_urgent     = blue
 theme.fg_minimize   = orange
 
-theme.useless_gap   = dpi(4)
-theme.border_width  = dpi(1)
-theme.border_normal = dgrey
-theme.border_focus  = blue
-theme.border_marked = orange
+theme.useless_gap        = dpi(4)
+theme.gap_single_client  = false
+theme.border_width       = dpi(1)
+theme.border_normal      = dgrey
+theme.border_focus       = blue
+theme.border_marked      = orange
 
 
 -- There are other variable sets
