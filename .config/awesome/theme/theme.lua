@@ -81,6 +81,7 @@ theme.hotkeys_modifiers_fg  = theme.fg_normal
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
+theme.notification_width = dpi(400)
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
