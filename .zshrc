@@ -43,6 +43,9 @@ function ff() {
 # Alias for the plugin "jump"
 alias j="jump"
 
+# Node REPL with top-level await
+alias noderepl="node --experimental-repl-await"
+
 # Serve current directory on port 1337
 alias webshare="python -m SimpleHTTPServer 1337"
 
