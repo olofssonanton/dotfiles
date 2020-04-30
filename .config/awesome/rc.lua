@@ -9,6 +9,12 @@ local beautiful = require("beautiful")
 local dpi       = require("beautiful.xresources").apply_dpi
 -- Notification library
 local naughty = require("naughty")
+
+-- Awesome 4.2 does not have this PR:
+-- https://github.com/awesomeWM/awesome/pull/1951
+-- So instead of setting this in the theme, let's do this:
+naughty.config.defaults['icon_size'] = dpi(40);
+
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps

@@ -82,6 +82,9 @@ theme.hotkeys_modifiers_fg  = theme.fg_normal
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
 theme.notification_width = dpi(400)
+-- The following has no effect, yet. Needs Awesome 4.3
+-- https://github.com/awesomeWM/awesome/pull/1951
+theme.notification_icon_size = dpi(40)
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
