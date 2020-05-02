@@ -381,6 +381,13 @@ globalkeys = gears.table.join(
               end,
               {description = "toggle gapless fullscreen", group = "client"}),
 
+    -- Utilities
+    awful.key({ modkey }, "v",
+              function ()
+                awful.util.spawn_with_shell("xdg-open \"https://www.google.com/search?q=`xsel -o`\"")
+              end,
+             {description = "search the web for whatever is in xsel's primary selection", group = "custom"}),
+
     -- Multimedia
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
