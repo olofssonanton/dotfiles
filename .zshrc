@@ -59,7 +59,7 @@ alias wifi="nmtui"
 alias pingme="ping antonolofsson.com"
 
 # See ports in use
-alias portsinuse="sudo netstat -tulpn"
+alias portsinuse="sudo ss -tulpn"
 
 
 # *-*-*-*-* GIT *-*-*-*-*
