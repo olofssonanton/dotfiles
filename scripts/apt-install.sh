@@ -13,7 +13,11 @@ function install {
 }
 
 install tmux
-install awesome
-install unclutter # Change EXTRA_OPTS in /etc/default/unclutter to "-idle 2 -noevents"
 install zsh
-install xsel
+
+if [ "$NO_GUI" != "true" ];
+then
+  install awesome
+  install unclutter # Change EXTRA_OPTS in /etc/default/unclutter to "-idle 2 -noevents"
+  install xsel
+fi
