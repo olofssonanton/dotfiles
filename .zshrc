@@ -37,7 +37,7 @@ alias cal="ncal -bw"
 # Search in folder, excluding certain paths
 function ff() {
   echo $1
-  find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/build/*" -exec grep --color -nH -e $1 {} +
+  find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/.babelCache/*" -not -path "*/build/*" -exec grep --color -nH -e $1 {} +
 }
 
 # Alias for the plugin "jump"
