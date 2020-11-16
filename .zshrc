@@ -4,6 +4,7 @@ ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 ZSH_THEME="olofssonanton"
 
 plugins=(
+  colored-man-pages
   dircycle
   docker
   git
