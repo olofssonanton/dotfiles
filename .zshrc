@@ -96,6 +96,13 @@ export N_PREFIX="$HOME/.node"
 export PATH="$N_PREFIX/bin:$PATH"
 
 
+# *-*-*-*-* Docker *-*-*-*-*
+
+function dockerexec() {
+  docker exec -it $(docker ps | grep $1 | awk -F " " '{ print $1 }') ${2:-bash}
+}
+
+
 # *-*-*-*-* LOCAL SETTINGS *-*-*-*-*
 
 if [ -f ~/.localrc ]; then
