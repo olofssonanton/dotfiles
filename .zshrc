@@ -1,5 +1,7 @@
 # *-*-*-*-* ZSH/OH MY ZSH SETTINGS *-*-*-*-*
 
+setopt globdots
+
 ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 ZSH_THEME="olofssonanton"
 
