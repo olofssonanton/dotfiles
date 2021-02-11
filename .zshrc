@@ -37,6 +37,9 @@ alias clip="xclip -se c"
 # Display calendar
 alias cal="ncal -bw"
 
+# List disk usage of contents of current directory
+alias diskusage="du -shc * | sort -h"
+
 # Search in folder, excluding certain paths
 function ff() {
   echo $1
