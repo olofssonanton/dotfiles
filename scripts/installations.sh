@@ -12,10 +12,27 @@ else
   real_user=$(whoami)
 fi
 
-./scripts/apt-install.sh
+unameOut="$(uname -s)"
+case "${unameOut}" in
+Linux*)
+  ./scripts/apt-install.sh
+  ;;
+Darwin*)
+  ./scripts/install-brew.sh
+  ;;
+esac
+
 
 function getUserShell() {
-  getent passwd $real_user | cut -d: -f7
+  case "${unameOut}" in
+  Linux*)
+    getent passwd $real_user | cut -d: -f7
+    ;;
+  Darwin*)
+    dscl . -read /Users/$real_user UserShell | sed 's/UserShell: //'
+    ;;
+  esac
+
 }
 
 user_shell=$(getUserShell)

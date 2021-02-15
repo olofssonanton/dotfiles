@@ -32,6 +32,12 @@ linkDotfile .zshenv
 linkDotfile .zshrc
 linkDotfile .gitconfig
 linkDotfile .tmux.conf
-linkDotfile .xinitrc
-linkDotfile .xsession
-linkDotfile .config/awesome
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+Linux*)
+  linkDotfile .xinitrc
+  linkDotfile .xsession
+  linkDotfile .config/awesome
+  ;;
+esac
