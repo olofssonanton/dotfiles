@@ -40,10 +40,20 @@ alias cal="ncal -bw"
 # List disk usage of contents of current directory
 alias diskusage="du -shc * | sort -h"
 
-# Search in folder, excluding certain paths
+# Search in directory, excluding certain paths
 function ff() {
   echo $1
   find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/.babelCache/*" -not -path "*/build/*" -not -path "*/dist/*" -exec grep --color -nH -e $1 {} +
+}
+
+# Find and replace in all files in the current directory
+function findAndReplace() {
+  echo "Replacing all occurrences of \"$1\" with \"$2\" in current directory."
+  if [ "$(uname)" = "Darwin" ]; then
+    find . -type f -exec test -r {} \; -exec test -w {} \; -exec sed -i "" "s/$1/$2/g" {} \;
+  elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+    find . -type f -readable -writable -exec sed -i "s/$1/$2/g" {} \;
+  fi
 }
 
 # Alias for the plugin "jump"
