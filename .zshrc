@@ -48,11 +48,19 @@ function ff() {
 
 # Find and replace in all files in the current directory
 function findAndReplace() {
-  echo "Replacing all occurrences of \"$1\" with \"$2\" in current directory."
-  if [ "$(uname)" = "Darwin" ]; then
-    find . -type f -exec test -r {} \; -exec test -w {} \; -exec sed -i "" "s/$1/$2/g" {} \;
-  elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-    find . -type f -readable -writable -exec sed -i "s/$1/$2/g" {} \;
+  if [ -z "$3" ]; then
+    echo "Replacing all occurrences of \"$1\" with \"$2\" in current directory."
+    if [ "$(uname)" = "Darwin" ]; then
+      find . -type f -exec test -r {} \; -exec test -w {} \; -exec sed -i "" "s/$1/$2/g" {} \;
+    elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+      find . -type f -readable -writable -exec sed -i "s/$1/$2/g" {} \;
+    fi
+  else
+    if [ "$(uname)" = "Darwin" ]; then
+      sed -i "" "s/$1/$2/g" "$3"
+    elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+      sed -i "s/$1/$2/g" "$3"
+    fi
   fi
 }
 
