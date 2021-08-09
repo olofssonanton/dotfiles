@@ -7,11 +7,3 @@ function git_prompt_info() {
     echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
-
-# Outputs current JIRA-task info in prompt format
-function jira_prompt_info() {
-  if [ -z "$currentTask" ]; then
-    return 0
-  fi
-  echo "$ZSH_THEME_JIRA_PROMPT_PREFIX$currentTask$ZSH_THEME_JIRA_PROMPT_SUFFIX"
-}
