@@ -7,3 +7,11 @@ function git_prompt_info() {
     echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
+
+# Outputs the current kubectl context
+function kubectl_prompt_info() {
+  local ref
+  if [ -n "$AWS_VAULT" ]; then
+    echo "$ZSH_THEME_KUBECTL_PROMPT_PREFIX$(kubectl config current-context | awk -F"/" '{print $2}')$ZSH_THEME_KUBECTL_PROMPT_SUFFIX"
+  fi
+}
