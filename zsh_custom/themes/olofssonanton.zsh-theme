@@ -1,5 +1,5 @@
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
-local user_host='%{$fg[green]%}%n%{$reset_color%}@%{$fg_bold[magenta]%}%m %{$reset_color%}'
+local user_host='%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg_bold[magenta]%}%m %{$reset_color%}'
 local git_branch='$(git_prompt_info)'
 local kubectl_context='$(kubectl_prompt_info)'
 
