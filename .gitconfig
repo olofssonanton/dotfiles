@@ -1,3 +1,5 @@
 [user]
 	email = me@antonolofsson.com
 	name = Anton Olofsson
+[core]
+	excludesfile = ~/.gitignore

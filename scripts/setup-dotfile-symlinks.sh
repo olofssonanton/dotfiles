@@ -31,6 +31,7 @@ function linkDotfile {
 linkDotfile .zshenv
 linkDotfile .zshrc
 linkDotfile .gitconfig
+linkDotfile .gitignore
 linkDotfile .tmux.conf
 
 unameOut="$(uname -s)"
