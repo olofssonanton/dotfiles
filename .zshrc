@@ -18,6 +18,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+zstyle ':completion:*' special-dirs false
 
 # *-*-*-*-* PREFERENCES *-*-*-*-*
 
