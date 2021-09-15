@@ -1,5 +1,12 @@
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
-local user_host='%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg_bold[magenta]%}%m %{$reset_color%}'
+
+if [[ -n $SSH_CONNECTION ]]; then
+  local host_color='%{$fg_bold[blue]%}'
+else
+  local host_color='%{$fg_bold[magenta]%}'
+fi
+local user_host="%{\$fg[green]%}%n%{\$fg[yellow]%}@$host_color%m %{\$reset_color%}"
+
 local git_branch='$(git_prompt_info)'
 local kubectl_context='$(kubectl_prompt_info)'
 
