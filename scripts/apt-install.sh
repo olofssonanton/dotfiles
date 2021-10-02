@@ -20,4 +20,6 @@ then
   install awesome
   install unclutter # Change EXTRA_OPTS in /etc/default/unclutter to "-idle 2 -noevents"
   install xsel
+
+  ./scripts/gnome-terminal-configuration.sh
 fi
