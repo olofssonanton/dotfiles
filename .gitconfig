@@ -3,3 +3,5 @@
 	name = Anton Olofsson
 [core]
 	excludesfile = ~/.gitignore
+[pull]
+	rebase = true
