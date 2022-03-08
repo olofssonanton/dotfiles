@@ -5,3 +5,5 @@
 	excludesfile = ~/.gitignore
 [pull]
 	rebase = true
+[rebase]
+	autosquash = true
