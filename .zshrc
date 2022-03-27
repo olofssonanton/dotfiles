@@ -71,6 +71,9 @@ alias j="jump"
 # Node REPL with top-level await
 alias noderepl="node --experimental-repl-await"
 
+# Attach to or create tmux session
+alias tmuxa="tmux new-session -A -s"
+
 # Serve current directory on port 1337
 alias webshare="python -m SimpleHTTPServer 1337"
 
