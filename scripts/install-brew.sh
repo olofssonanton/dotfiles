@@ -5,7 +5,7 @@ if [ -x "$(which brew)" ]; then
   exit 0
 fi
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Adjust permissions to fix zsh 'insecure completion-dependent directories detected' issue
 chmod -R go-w "$(brew --prefix)/share"

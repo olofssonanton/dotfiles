@@ -18,7 +18,7 @@ Linux*)
   ./scripts/apt-install.sh
   ;;
 Darwin*)
-  ./scripts/install-brew.sh
+   sudo -u $real_user -i $(pwd)/scripts/install-brew.sh
   ;;
 esac
 
