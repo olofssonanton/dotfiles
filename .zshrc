@@ -15,7 +15,6 @@ plugins=(
   npm
   z
   zsh-syntax-highlighting
-  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
