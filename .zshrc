@@ -9,6 +9,7 @@ plugins=(
   colored-man-pages
   dircycle
   docker
+  kubectl
   git
   globalias
   jump
