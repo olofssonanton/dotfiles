@@ -45,7 +45,7 @@ alias diskusage="du -shc * | sort -h"
 # Search in directory, excluding certain paths
 function ff() {
   echo $1
-  find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/.babelCache/*" -not -path "*/build/*" -not -path "*/dist/*" -exec grep --color=always -nHI -e $1 {} +
+  find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/.babelCache/*" -not -path "*/build/*" -not -path "*/dist/*" -exec grep --color=auto -nHI -e $1 {} +
 }
 
 # Find and replace in all files in the current directory
