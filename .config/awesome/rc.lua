@@ -15,6 +15,37 @@ local naughty = require("naughty")
 -- So instead of setting this in the theme, let's do this:
 naughty.config.defaults['icon_size'] = dpi(40);
 
+-- Work around an awesome 4.3 bug that hangs awesome at 100% CPU.
+-- When a screen is removed (e.g. a flapping monitor), naughty calls
+-- destroy_all_notifications(), which loops "while #list > 0" calling
+-- naughty.destroy(). destroy() silently does nothing for notifications that
+-- are no longer visible, so the list never shrinks and the loop never ends.
+-- This version makes sure every iteration removes at least one entry.
+naughty.destroy_all_notifications = function(screens, reason)
+    if not screens then
+        screens = {}
+        for key in pairs(naughty.notifications) do
+            if key ~= "suspended" then table.insert(screens, key) end
+        end
+    end
+    local ret = true
+    for _, scr in pairs(screens) do
+        for _, list in pairs(naughty.notifications[scr] or {}) do
+            while #list > 0 do
+                local n, len = list[1], #list
+                if not naughty.destroy(n, reason) then ret = nil end
+                if #list >= len then
+                    -- destroy() did not remove it: drop it by hand
+                    if n.timer then n.timer:stop() end
+                    if n.box then n.box.visible = false end
+                    table.remove(list, 1)
+                end
+            end
+        end
+    end
+    return ret
+end
+
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
