@@ -10,11 +10,6 @@ local dpi       = require("beautiful.xresources").apply_dpi
 -- Notification library
 local naughty = require("naughty")
 
--- Awesome 4.2 does not have this PR:
--- https://github.com/awesomeWM/awesome/pull/1951
--- So instead of setting this in the theme, let's do this:
-naughty.config.defaults['icon_size'] = dpi(40);
-
 -- Work around an awesome 4.3 bug that hangs awesome at 100% CPU.
 -- When a screen is removed (e.g. a flapping monitor), naughty calls
 -- destroy_all_notifications(), which loops "while #list > 0" calling
