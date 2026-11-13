@@ -418,9 +418,9 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 0 set Master 1dB+") end),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 0 set Master 1dB-") end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -c 0 set Master toggle") end)
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -D default set Master 1%+") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -D default set Master 1%-") end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -D default set Master toggle") end)
 )
 
 clientkeys = gears.table.join(
