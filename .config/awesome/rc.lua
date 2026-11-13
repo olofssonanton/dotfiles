@@ -647,3 +647,75 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+
+---------------------------------------------------------
+-- Puts a 1-pixel bar on the outer left and right edges of the desktop that moves the cursor to the opposite end.
+--
+-- The bars are rebuilt whenever screens are added, removed or moved, so they survive monitor hotplugs. They only exist while
+-- more than one monitor is connected; with a single monitor there is nothing to warp to, so they are removed.
+---------------------------------------------------------
+warp_bars     = true
+
+if warp_bars then
+  local barwidth = 1
+  local warpbarL, warpbarR
+
+  -- Leftmost and rightmost screen, by their outer edges.
+  local function edge_screens()
+    local left, right
+    for s in screen do
+      local g = s.geometry
+      if not left or g.x < left.geometry.x then left = s end
+      if not right or g.x + g.width > right.geometry.x + right.geometry.width then right = s end
+    end
+    return left, right
+  end
+
+  -- Move the cursor to column x on screen s. Keep the cursor's height, but clamp
+  -- it into s: screens can have different heights and vertical offsets.
+  local function warp_to(s, x)
+    local g = s.geometry
+    local y = math.max(g.y, math.min(mouse.coords().y, g.y + g.height - 1))
+    mouse.coords({ x = x, y = y })
+  end
+
+  local function setup_warp_bars()
+    if warpbarL then warpbarL:remove() end
+    if warpbarR then warpbarR:remove() end
+    warpbarL, warpbarR = nil, nil
+
+    -- Only useful with more than one monitor.
+    if screen.count() < 2 then return end
+
+    local left, right = edge_screens()
+
+    warpbarL = awful.wibar({ position = "left", screen = left, width = barwidth, bg = "#000000" })
+    warpbarL:connect_signal("mouse::enter", function ()
+      local _, r = edge_screens()
+      local g = r.geometry
+      warp_to(r, g.x + g.width - barwidth - 1)
+    end)
+
+    warpbarR = awful.wibar({ position = "right", screen = right, width = barwidth, bg = "#000000" })
+    warpbarR:connect_signal("mouse::enter", function ()
+      local l = edge_screens()
+      warp_to(l, l.geometry.x + barwidth + 1)
+    end)
+  end
+
+  -- Rebuild the bars once after a burst of screen changes.
+  local pending = false
+  local function schedule_setup()
+    if pending then return end
+    pending = true
+    gears.timer.delayed_call(function ()
+      pending = false
+      setup_warp_bars()
+    end)
+  end
+  screen.connect_signal("list", schedule_setup)
+  screen.connect_signal("property::geometry", schedule_setup)
+
+  setup_warp_bars()
+end
