@@ -280,6 +280,25 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
+-- Focus the screen to the left/right by physical position (screen indices follow
+-- RandR order, which does not match the physical layout). At the outermost screen,
+-- wrap around to the screen at the opposite end, like focus_relative does.
+local function focus_screen_wrapping(dir)
+    local s = awful.screen.focused()
+    local target = s:get_next_in_direction(dir)
+    if not target then
+        for other in screen do
+            local g = other.geometry
+            if not target
+              or (dir == "right" and g.x < target.geometry.x)
+              or (dir == "left" and g.x + g.width > target.geometry.x + target.geometry.width) then
+                target = other
+            end
+        end
+    end
+    if target and target ~= s then awful.screen.focus(target) end
+end
+
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -310,10 +329,10 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift", "Control" }, "Left", function () awful.client.swap.byidx( -1) end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey,           }, "Left", function () awful.screen.focus_relative(-1)        end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey,           }, "Right", function () awful.screen.focus_relative( 1)       end,
-              {description = "focus the previous screen", group = "screen"}),
+    awful.key({ modkey,           }, "Left", function () focus_screen_wrapping("left")  end,
+              {description = "focus the screen to the left", group = "screen"}),
+    awful.key({ modkey,           }, "Right", function () focus_screen_wrapping("right") end,
+              {description = "focus the screen to the right", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
     awful.key({ modkey,           }, "Tab",
